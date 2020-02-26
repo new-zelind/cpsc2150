@@ -3,16 +3,17 @@ package cpsc2150.connectX;
 /**
  * Created by zelindl on 2/6/20.
  */
-public class GameBoard {
+public class GameBoard implements IGameBoard {
 
     /**
      * @invariant   No tokens can be placed outside of the game board.
      * @invariant   No tokens can be placed in a column that is already full.
      */
 
-    private int row;
-    private int col;
-    private GameBoard board;
+    private int rows;
+    private int cols;
+    private int numToWin;
+    private char[][] board;
     private boolean isWinner;
     private boolean isTie;
 
@@ -21,6 +22,41 @@ public class GameBoard {
      * @post    A new game board is created.
      */
     public GameBoard(){
+        rows = getNumRows();
+        cols = getNumColumns();
+        numToWin = getNumToWin();
+        isTie = isWinner = false;
+        board = new char[rows][cols];
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<rows; j++){
+                board[i][j] = ' ';
+            }
+        }
+
+    }
+
+    /**
+     * @pre     the game board has been created
+     * @return  an integer representing the number of rows in the game board.
+     */
+    public int getNumRows(){
+
+    }
+
+    /**
+     * @pre     the game board has been created
+     * @return  an integer representing the number of columns in the game board.
+     */
+    public int getNumColumns(){
+
+    }
+
+    /**
+     *
+     * @return  an integer representing the number of columns in the game board.
+     * @post    numToWin <= numRows && numToWin <= numColumns
+     */
+    public int getNumToWin(){
 
     }
 
@@ -32,6 +68,15 @@ public class GameBoard {
      *          false if the column is full of tokens.
      */
     public Boolean checkIfFree(int c){
+        int numTokens = 0;
+        while(numTokens < getNumRows()){
+            if(board[numTokens][c] != ' '){
+                numTokens++;
+                if(numTokens == rows){return false;}
+            }
+            else{return true;}
+
+        }
 
     }
 
@@ -43,7 +88,16 @@ public class GameBoard {
      *          false if the player has not won.
      */
     public Boolean checkForWin(int c){
+        //get row number of latest position
+        int rowNum = 0;
+        while(board[rowNum][c] != ' '){
+            rowNum++;
+        }
 
+        //get character
+
+        BoardPosition newPos = new BoardPosition(rowNum, c);
+        //if(checkHorizWin(newPos, ))
     }
 
     /**

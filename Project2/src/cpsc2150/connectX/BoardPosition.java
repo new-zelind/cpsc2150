@@ -23,7 +23,7 @@ public class BoardPosition {
      * @return  Returns an integer representing the row number of the position.
      */
     public int getRow(){
-
+        return rowNum;
     }
 
     /**
@@ -31,7 +31,7 @@ public class BoardPosition {
      * @return  Returns an integer representing the column number of the position.
      */
     public int getColumn(){
-
+        return colNum;
     }
 
     /**
@@ -42,7 +42,10 @@ public class BoardPosition {
      */
     @Override
     public boolean equals(Object position){
-
+        if(this == position){return true;}
+        if(position == null || getClass() != position.getClass()){return false;}
+        BoardPosition boardPos = (BoardPosition) position;
+        return ((rowNum == boardPos.rowNum) && (colNum == boardPos.colNum));
     }
 
     /**
@@ -51,7 +54,11 @@ public class BoardPosition {
      */
     @Override
     public String toString(){
-
+        String toReturn = "";
+        toReturn += Integer.toString(rowNum);
+        toReturn += ", ";
+        toReturn += Integer.toString(colNum);
+        return toReturn;
     }
 
 
