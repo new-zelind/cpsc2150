@@ -7,31 +7,35 @@ package cpsc2150.connectX;
  */
 public interface IGameBoard {
 
-    public abstract int getNumRows();
+    public static final int MAXROWS = 7;
+    public static final int MAXCOLS = 7;
+    public static final int NUMTOWIN = 4;
 
-    public abstract int getNumColumns();
+    public int getNumRows();
 
-    public abstract int getNumToWin();
+    public int getNumColumns();
 
-    public abstract Boolean checkIfFree(int c);
+    public int getNumToWin();
 
-    public abstract Boolean checkForWin(int c);
+    public Boolean checkIfFree(int c);
 
-    public abstract void placeToken(char p, int c);
+    public Boolean checkForWin(int c);
 
-    public abstract Boolean checkHorizWin(BoardPosition pos, char p);
+    public void placeToken(char p, int c);
 
-    public abstract Boolean checkVertWin(BoardPosition pos, char p);
+    public Boolean checkHorizWin(BoardPosition pos, char p);
 
-    public abstract Boolean checkDiagWin(BoardPosition pos, char p);
+    public Boolean checkVertWin(BoardPosition pos, char p);
 
-    public abstract char whatsAtPos(BoardPosition pos);
+    public Boolean checkDiagWin(BoardPosition pos, char p);
 
-    public abstract boolean isPlayerAtPos(BoardPosition pos, char player);
+    public char whatsAtPos(BoardPosition pos);
+
+    public boolean isPlayerAtPos(BoardPosition pos, char player);
 
     @Override
-    public abstract String toString();
+    public String toString();
 
-    public abstract boolean checkTie();
+    public boolean checkTie();
 
 }

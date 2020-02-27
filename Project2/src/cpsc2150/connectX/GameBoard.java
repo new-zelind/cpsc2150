@@ -22,9 +22,9 @@ public class GameBoard implements IGameBoard {
      * @post    A new game board is created.
      */
     public GameBoard(){
-        rows = getNumRows();
-        cols = getNumColumns();
-        numToWin = getNumToWin();
+        rows = MAXROWS;
+        cols = MAXCOLS;
+        numToWin = NUMTOWIN;
         isTie = isWinner = false;
         board = new char[rows][cols];
         for(int i=0; i<rows; i++){
@@ -32,33 +32,26 @@ public class GameBoard implements IGameBoard {
                 board[i][j] = ' ';
             }
         }
-
     }
 
     /**
      * @pre     the game board has been created
      * @return  an integer representing the number of rows in the game board.
      */
-    public int getNumRows(){
-
-    }
+    public int getNumRows(){ return rows; }
 
     /**
      * @pre     the game board has been created
      * @return  an integer representing the number of columns in the game board.
      */
-    public int getNumColumns(){
-
-    }
+    public int getNumColumns(){ return cols; }
 
     /**
      *
      * @return  an integer representing the number of columns in the game board.
      * @post    numToWin <= numRows && numToWin <= numColumns
      */
-    public int getNumToWin(){
-
-    }
+    public int getNumToWin(){ return numToWin; }
 
     /**
      * @pre     A player wants to place a token.
@@ -69,15 +62,13 @@ public class GameBoard implements IGameBoard {
      */
     public Boolean checkIfFree(int c){
         int numTokens = 0;
-        while(numTokens < getNumRows()){
-            if(board[numTokens][c] != ' '){
-                numTokens++;
-                if(numTokens == rows){return false;}
-            }
-            else{return true;}
-
+        int i = 0;
+        while(i < getNumRows()){
+            if(board[i][c] != ' '){numTokens++;}
+            i++;
         }
 
+        return (numTokens == rows);
     }
 
     /**
@@ -95,9 +86,12 @@ public class GameBoard implements IGameBoard {
         }
 
         //get character
-
-        BoardPosition newPos = new BoardPosition(rowNum, c);
-        //if(checkHorizWin(newPos, ))
+        char token = board[rowNum][c];
+        BoardPosition currPos = new BoardPosition(rowNum, c);
+        if(checkHorizWin(currPos, token)){return true;}
+        else if(checkVertWin(currPos, token)){return true;}
+        else if(checkDiagWin(currPos, token)){return true;}
+        else {return false;}
     }
 
     /**
@@ -107,7 +101,13 @@ public class GameBoard implements IGameBoard {
      * @post
      */
     public void placeToken(char p, int c){
-
+        if(checkIfFree(c)){
+            int i = 0;
+            while(board[i][c] != ' '){
+                i++;
+            }
+            board[i][c] = p;
+        }
     }
 
     /**
@@ -119,7 +119,7 @@ public class GameBoard implements IGameBoard {
      *          false if there is no winner.
      */
     public Boolean checkHorizWin(BoardPosition pos, char p){
-
+        boolean traverseRight = false;
     }
 
     /**
