@@ -15,7 +15,8 @@ public class BoardPosition {
      * @post    A fully made BoardPosition class instance.
      */
     public BoardPosition(int row, int column){
-
+        rowNum = row;
+        colNum = column;
     }
 
     /**

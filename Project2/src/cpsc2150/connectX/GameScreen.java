@@ -16,11 +16,16 @@ public class GameScreen {
      * @invariant Players will have the option to play more than one game.
      */
 
-    private boolean isPlayerturn;
-    private boolean playAgain;
-    private boolean isLegalColumn;
+    private static boolean isPlayerXturn;
+    private static boolean playAgain;
+    private static boolean isLegalColumn;
+    private static GameBoard gameBoard;
 
     public static void main(){
+        while(getPlayAgain()){
+            printGameBoard(gameBoard);
+
+        }
 
     }
 
@@ -28,7 +33,10 @@ public class GameScreen {
      * @post    Creates a GameScreen object.
      */
     public GameScreen(){
-
+        board = new GameBoard();
+        isPlayerXturn = true;
+        playAgain = true;
+        isLegalColumn = false;
     }
 
     /**
@@ -36,8 +44,8 @@ public class GameScreen {
      * @param gameBoard A string formatted as a game board.
      * @post    A fully formatted game board printed on the terminal interface.
      */
-    public void printGameBoard(String gameBoard){
-
+    public static void printGameBoard(String gameBoard){
+        System.out.print(gameBoard.toString());
     }
 
     /**
@@ -45,8 +53,18 @@ public class GameScreen {
      * @post    This function will get where the player wants to place their token.
      * @return  An integer representing the player's column choice.
      */
-    public int getPlayersChoice(){
+    public static int getPlayersChoice(){
+        String toPrint = ("Player ");
+        if(isPlayerXturn){
+            toPrint = toPrint.concat("X, ");
+        } else {
+            toPrint = toPrint.concat("O, ");
+        }
+        toPrint = toPrint.concat("what column do you want to place your marker in?");
+        System.out.println(toPrint);
 
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
     /**
@@ -55,8 +73,8 @@ public class GameScreen {
      * @return  true if it is Player X's turn.
      *          false if it is Player O's turn.
      */
-    public boolean getIsPlayerXTurn(){
-
+    public static boolean getIsPlayerXTurn(){
+        return isPlayerXturn;
     }
 
     /**
@@ -64,8 +82,16 @@ public class GameScreen {
      * @param toSet The value to set isPlayerXTurn to.
      * @post    isPlayerXTurn will be set to the input boolean variable.
      */
-    public void setIsPlayerXTurn(boolean toSet){
+    public static void setIsPlayerXTurn(boolean toSet){
+        isPlayerXturn = toSet;
+    }
 
+    public static boolean getPlayAgain(){
+        return playAgain;
+    }
+
+    public static void setPlayAgain(boolean toSet){
+        playAgain = toSet;
     }
 
 
