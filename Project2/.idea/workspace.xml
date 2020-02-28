@@ -41,15 +41,15 @@
       <file leaf-file-name="GameBoard.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/GameBoard.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="472">
-              <caret line="121" column="38" lean-forward="false" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+            <state relative-caret-position="438">
+              <caret line="266" column="0" lean-forward="true" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
               <folding>
                 <element signature="docComment;method#getNumRows#0;class#GameBoard#0" expanded="false" />
                 <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
                 <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
                 <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-                <element signature="e#3709#3710#0" expanded="true" />
-                <element signature="e#3754#3755#0" expanded="true" />
+                <element signature="e#8292#8293#0" expanded="true" />
+                <element signature="e#8351#8352#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -94,7 +94,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="-3" />
     <option name="width" value="1926" />
-    <option name="height" value="899" />
+    <option name="height" value="1035" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -111,6 +111,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
@@ -144,8 +146,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -386,7 +386,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-3" y="0" width="1926" height="899" extended-state="6" />
+    <frame x="-3" y="0" width="1926" height="1035" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -436,6 +436,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/BoardPosition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="46" column="58" lean-forward="false" selection-start-line="46" selection-start-column="58" selection-end-line="46" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/IGameBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" column="11" lean-forward="false" selection-start-line="19" selection-start-column="11" selection-end-line="19" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/GameBoard.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1785">
+          <caret line="121" column="38" lean-forward="false" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+          <folding>
+            <element signature="docComment;method#getNumRows#0;class#GameBoard#0" expanded="false" />
+            <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
+            <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
+            <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/GameScreen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="5" column="3" lean-forward="false" selection-start-line="5" selection-start-column="3" selection-end-line="5" selection-end-column="3" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/GameBoard.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1683">
@@ -445,8 +486,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -502,8 +543,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -527,8 +568,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -552,8 +593,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -593,8 +634,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -626,8 +667,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -659,8 +700,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -692,8 +733,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -725,8 +766,8 @@
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -766,15 +807,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/cpsc2150/connectX/GameBoard.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="472">
-          <caret line="121" column="38" lean-forward="false" selection-start-line="121" selection-start-column="38" selection-end-line="121" selection-end-column="38" />
+        <state relative-caret-position="438">
+          <caret line="266" column="0" lean-forward="true" selection-start-line="266" selection-start-column="0" selection-end-line="266" selection-end-column="0" />
           <folding>
             <element signature="docComment;method#getNumRows#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumColumns#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#getNumToWin#0;class#GameBoard#0" expanded="false" />
             <element signature="docComment;method#checkIfFree#0;class#GameBoard#0" expanded="false" />
-            <element signature="e#3709#3710#0" expanded="true" />
-            <element signature="e#3754#3755#0" expanded="true" />
+            <element signature="e#8292#8293#0" expanded="true" />
+            <element signature="e#8351#8352#0" expanded="true" />
           </folding>
         </state>
       </provider>

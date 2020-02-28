@@ -119,7 +119,34 @@ public class GameBoard implements IGameBoard {
      *          false if there is no winner.
      */
     public Boolean checkHorizWin(BoardPosition pos, char p){
+
+        //initialize variables
         boolean traverseRight = false;
+        int count = 1;
+        BoardPosition currPos = new BoardPosition(pos.getRow(), pos.getColumn());
+
+        while(!traverseRight){
+            if(currPos.getColumn()+1 < cols){
+                currPos = new BoardPosition(currPos.getRow(), (currPos.getColumn()+1));
+                if(whatsAtPos(currPos) == p){
+                    count ++;
+                    if(count == numToWin) return true;
+                } else break;
+            } else traverseRight = true;
+        }
+
+        currPos = pos;
+        while(traverseRight){
+            if(currPos.getColumn()-1 >= 0){
+                currPos = new BoardPosition(currPos.getRow(), (currPos.getColumn()+1));
+                if(whatsAtPos(currPos) == p){
+                    count ++;
+                    if(count == numToWin) return true;
+                } else break;
+            } else break;
+        }
+
+        return false;
     }
 
     /**
@@ -131,6 +158,21 @@ public class GameBoard implements IGameBoard {
      *          false if there is no winner.
      */
     public Boolean checkVertWin(BoardPosition pos, char p){
+
+        int count = 1;
+        BoardPosition currPos = new BoardPosition(pos.getRow(), pos.getColumn());
+
+        while(count < numToWin){
+            if(currPos.getRow()-1 >= 0){
+                currPos = new BoardPosition((currPos.getRow()-1), currPos.getColumn());
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == numToWin) return true;
+                } else break;
+            } else break;
+        }
+
+        return false;
 
     }
 
@@ -144,6 +186,59 @@ public class GameBoard implements IGameBoard {
      */
     public Boolean checkDiagWin(BoardPosition pos, char p){
 
+        //initialize
+        int count = 1;
+        BoardPosition currPos = new BoardPosition(pos.getRow(), pos.getColumn());
+
+        //move southeast
+        while(count < numToWin){
+            if(currPos.getRow()-1 >= 0 && currPos.getColumn()+1 < cols){
+                currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()+1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == numToWin){return true;}
+                } else break;
+            } else break;
+        }
+
+        //move northwest
+        while(count < numToWin){
+            if(currPos.getRow()+1 < rows && currPos.getColumn()-1 >= 0){
+                currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()-1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == numToWin){return true;}
+                } else break;
+            } else break;
+        }
+
+        //reset
+        currPos = new BoardPosition(pos.getRow(), pos.getColumn());
+        count = 1;
+
+        //move southwest
+        while(count < numToWin){
+            if(currPos.getRow()-1 >= 0 && currPos.getColumn()-1 >= 0){
+                currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()-1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == numToWin){return true;}
+                } else break;
+            } else break;
+        }
+
+        //move northeast
+        while(count < numToWin){
+            if(currPos.getRow()+1 < rows && currPos.getColumn()+1 < cols){
+                currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()+1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == numToWin){return true;}
+                } else return false;
+            } else return false;
+        }
+
+        return false;
     }
 
     /**
@@ -154,7 +249,7 @@ public class GameBoard implements IGameBoard {
      *          " " if nothing is there.
      */
     public char whatsAtPos(BoardPosition pos){
-
+        return board[pos.getRow()][pos.getColumn()];
     }
 
     /**
@@ -165,7 +260,9 @@ public class GameBoard implements IGameBoard {
      *          false if the player doesn't have a piece at the specified position
      */
     public boolean isPlayerAtPos(BoardPosition pos, char player){
-
+        char charAtPosition = whatsAtPos(pos);
+        if(player == charAtPosition) return true;
+        else return false;
     }
 
     /**
@@ -173,8 +270,24 @@ public class GameBoard implements IGameBoard {
      * @post    This will make a string ready to print to the terminal.
      * @return  A string representing the current board state.
      */
+    //FIXME
     public String toString(){
+        //initialize first row
+        String gameBoardString = "|";
+        for(int i=0; i<cols; i++){ gameBoardString.concat(i + "|"); }
+        gameBoardString += "\n";
 
+        BoardPosition currPos = new BoardPosition(0, 0);
+        for(int r = rows-1; r >= 0; r--){
+            gameBoardString.concat("|");
+            for(int c = 0; c <= cols; c++){
+                currPos = new BoardPosition(r, c);
+                gameBoardString += (whatsAtPos(currPos) + "|");
+            }
+            gameBoardString += "\n";
+        }
+
+        return gameBoardString;
     }
 
     /**
