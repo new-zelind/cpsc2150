@@ -3,11 +3,19 @@ package cpsc2150.connectX;
 /**
  * Created by zelindl on 2/25/20.
  *
+ * @defines MAXROWS:  Z - the maximum number of rows in the game board
+ *          MAXCOLS:  Z - the maximum number of columns in the game board
+ *          NUMTOWIN: Z - the number of tokens in a row required to win
+ *
+ * @initialization  ensures the game board is full of blank characters and is size MAXROWS x MAXCOLS.
+ *
+ * @constraints MAXROWS > 0 && MAXCOLS >0
+ *              0 < NUMTOWIN <= (MAXROWS || MAXCOLS)
  *
  */
 public interface IGameBoard {
 
-    public static final int MAXROWS = 7;
+    public static final int MAXROWS = 6;
     public static final int MAXCOLS = 7;
     public static final int NUMTOWIN = 4;
 
@@ -103,14 +111,6 @@ public interface IGameBoard {
      *          false if the player doesn't have a piece at the specified position
      */
     public boolean isPlayerAtPos(BoardPosition pos, char player);
-
-    /**
-     * @pre     A new turn has just begun.
-     * @post    This will make a string ready to print to the terminal.
-     * @return  A string representing the current board state.
-     */
-    @Override
-    public String toString();
 
     /**
      * @pre     No winner has been declared yet.
