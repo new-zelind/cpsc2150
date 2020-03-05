@@ -9,3 +9,6 @@ test: cpsc2150/banking/TestMortgage.java cpsc2150/banking/IMortgage.java cpsc215
 
 runtest: cpsc2150/banking/TestMortgage.class cpsc2150/banking/IMortgage.class cpsc2150/banking/ICustomer.class cpsc2150/banking/AbsMortgage.class cpsc2150/banking/AbsCustomer.class cpsc2150/banking/Mortgage.class cpsc2150/banking/Customer.class
 	java  -cp .:/usr/share/java/junit4.jar org.junit.runner.JUnitCore cpsc2150.banking.TestMortgage
+
+clean: 
+	rm -f cpsc2150/banking/*.class
