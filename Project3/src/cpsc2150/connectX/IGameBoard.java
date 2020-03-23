@@ -21,33 +21,58 @@ public interface IGameBoard {
     public static final int MINROWS = 3;
     public static final int MINCOLS = 3;
     public static final int MINNUMTOWIN = 3;
-    public static int NUMROWS = 0;
-    public static int NUMCOLS = 0;
-    public static int NUMTOWIN = 0;
 
+    public void setRows(int rowsInput);
+
+    public void setCols(int colsInput);
+
+    public void setNumToWin(int numToWinInput);
+
+    /**
+     * @return  the maximum number of rows.
+     */
     public int getMaxRows();
+
+    /**
+     * @return  the maximum number of columns.
+     */
     public int getMaxCols();
+
+    /**
+     * @return  the maximum number of consecutive tokens required to win.
+     */
     public int getMaxNumToWin();
+
+    /**
+     * @return  the minimum number of rows.
+     */
     public int getMinRows();
+
+    /**
+     * @return  the minimum number of columns.
+     */
     public int getMinCols();
+
+    /**
+     * @return  the minimum number of consecutive tokens required to win.
+     */
     public int getMinNumToWin();
 
     /**
-     * @pre     the game board has been created
      * @return  an integer representing the number of rows in the game board.
+     * @post    numRows <= MAXROWS && MINROWS <= numRows
      */
     public int getNumRows();
 
     /**
-     * @pre     the game board has been created
      * @return  an integer representing the number of columns in the game board.
+     * @post    numCols <= MAXCOLS && numCols >= MINCOLS
      */
     public int getNumColumns();
 
     /**
-     *
      * @return  an integer representing the number of columns in the game board.
-     * @post    numToWin <= numRows && numToWin <= numColumns
+     * @post    numToWin <= MAXNUMTOWIN && numToWin <= MINNUMTOWIN
      */
     public int getNumToWin();
 

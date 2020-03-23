@@ -12,7 +12,7 @@ package cpsc2150.connectX;
  * Correspondence numToWin = NUMTOWIN
  * Correspondence this = board[0...MAXROWS-1][0...MAXCOLS]
  */
-public class GameBoard implements IGameBoard {
+public class GameBoard implements IGameBoard extends AbsGameBoard {
 
     /**
      * @invariant   No tokens can be placed outside of the game board.
@@ -21,6 +21,7 @@ public class GameBoard implements IGameBoard {
 
     private int rows;
     private int cols;
+    private int numToWin;
     private char[][] board;
     private boolean isWinner;
     private boolean isTie;
@@ -30,17 +31,23 @@ public class GameBoard implements IGameBoard {
      * @post    A new game board is created.
      */
     public GameBoard(){
-        rows = MAXROWS;
-        cols = MAXCOLS;
-        numToWin = NUMTOWIN;
+        rows = MINROWS;
+        cols = MINCOLS;
+        numToWin = MINNUMTOWIN;
         isTie = isWinner = false;
         board = new char[rows][cols];
-        for(int i=0; i<MAXROWS; i++){
-            for(int j=0; j<MAXCOLS; j++){
+        for(int i=0; i<rows; i++){
+            for(int j=0; j<cols; j++){
                 board[i][j] = ' ';
             }
         }
     }
+
+    public void setRows(int rowsInput){ rows = rowsInput; }
+
+    public void setCols(int colsInput){ cols = colsInput; }
+
+    public void setNumToWin(int numToWinInput){ numToWin = numToWinInput; }
 
     public int getMaxRows(){ return MAXROWS; }
 
