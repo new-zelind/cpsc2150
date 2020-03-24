@@ -19,7 +19,6 @@ public class GameScreen {
     private static int maxPlayers = 10;
     private static int turn = 0;
     private static boolean onTurns = true;
-    private static List<char> tokens[];
     private static char currPlayer;
     private static boolean playAgain;
     private static GameBoard gameBoard;
@@ -27,8 +26,10 @@ public class GameScreen {
     public static void main(String[] args){
 
         Scanner scanner = new Scanner(System.in);
+
         int choice;
         String playAgainChoice;
+        List<Character> tokens = new ArrayList<>();
 
         //while the player wants to play again
         while(!playAgain){
@@ -42,7 +43,7 @@ public class GameScreen {
                 if(numPlayers < minPlayers){ System.out.println("Must be at least " + maxPlayers + " players"); }
                 else {System.out.println("Must be " + minPlayers + " players or fewer"); }
                 System.out.println("How many players?");
-                numPlayers - scanner.nextInt();
+                numPlayers = scanner.nextInt();
             }
 
             //get players' tokens
@@ -69,18 +70,19 @@ public class GameScreen {
                 System.out.println("How many rows should be on the board?");
                 int rowInput = scanner.nextInt();
             }
-            gameBoard.setRows(rowInput);
 
             //get number of columns + input validation
             System.out.println("How many columns should be on the board?");
             int colInput = scanner.nextInt();
-            while(colInput < gameBoard.getMinCols() || colInput > gameBoard.getMaxCols()){
-                if(colInput < gameBoard.getMinCols()){ System.out.println("Board cannot be less than 3 columns."); }
-                else { System.out.println("Board cannot be greater than 100 columns."); }
+            while(colInput < gameBoard.getMinCols() || colInput > gameBoard.getMaxCols()) {
+                if (colInput < gameBoard.getMinCols()) {
+                    System.out.println("Board cannot be less than 3 columns.");
+                } else {
+                    System.out.println("Board cannot be greater than 100 columns.");
+                }
                 System.out.println("How many columns should be on the board?");
                 int colInput = scanner.nextInt();
             }
-            gameBoard.setCols(colInput);
 
             //get num to win + input validation
             System.out.println("How many in a row to win?");
@@ -91,7 +93,6 @@ public class GameScreen {
                 System.out.println("How many in a row to win?");
                 int ntwInput = scanner.nextInt();
             }
-            gameBoard.setNumToWin(ntwInput);
 
             //choose gameboard type
             System.out.println("Would you like a Fast Game (F/f) or a Memory Efficient Game (M/m)?");
@@ -104,13 +105,18 @@ public class GameScreen {
             if(gameChoice.toLowerCase.equals('f')){ gameBoard = new GameBoard(); }
             else { gameBoard = new GameBoardMem(); }
 
+            //initialize gameboard rows and cols
+            gameBoard.setRows(rowInput);
+            gameBoard.setCols(colInput);
+            gameBoard.setNumToWin(ntwInput);
+
             //play through the turns
             while(onTurns == true) {
 
                 //print the gameboard, increment the turn counter, and get the current character
                 System.out.print(gameBoard.toString() + "\n");
                 turn++;
-                currPlayer = tokens.at((turn+1) % numPlayers);
+                currPlayer = tokens.at(turn % numPlayers);
 
                 //get the players choice and perform bounds checking
                 choice = getPlayersChoice();
@@ -141,23 +147,19 @@ public class GameScreen {
 
                     //print the winning message
                     System.out.print(gameBoard.toString() + "\n");
-                    if(!isPlayerXturn){ System.out.println("Player X won!"); }
-                    else { System.out.println("Player O won!"); }
+
+                    System.out.println("Player " + currPlayer + " won!");
 
                     //see if the player wants to play again and perform bounds checking
                     System.out.println("Would you like to play again?");
                     playAgainChoice = scanner.next();
-                    while(!playAgainChoice.toLowerCase().equals("y") && !playAgainChoice.toLowerCase().equals("n")){
+                    while(!playAgainChoice.toLowerCase().equals('y') && !playAgainChoice.toLowerCase().equals('n')){
                         System.out.println("Would you like to play again?");
                         playAgainChoice = scanner.next();
                     }
 
                     //if not, end the game
-                    if(playAgainChoice.toLowerCase().equals("n")) {return;}
-
-                    //reset the player and gameboard
-                    isPlayerXturn = true;
-                    gameBoard = new GameBoard();
+                    if(playAgainChoice.toLowerCase().equals('n')) {return;}
                 }
 
                 if(gameBoard.checkTie()){
@@ -169,18 +171,14 @@ public class GameScreen {
                     //ask the users if they want to play again and perform bounds checking
                     System.out.println("Would you like to play again?");
                     playAgainChoice = scanner.next();
-                    while(!playAgainChoice.toLowerCase().equals("y") && !playAgainChoice.toLowerCase().equals("n")){
+                    while(!playAgainChoice.toLowerCase().equals('y') && !playAgainChoice.toLowerCase().equals('n')){
                         System.out.println("Would you like to play again?");
                         playAgainChoice = scanner.next();
                     }
 
                     //if not, end the game
-                    if(playAgainChoice.toLowerCase().equals("n")) {return;}
-
-                    //reset the player and gameboard
-                    isPlayerXturn = true;
-                    gameBoard = new GameBoard();
-                }*/
+                    if(playAgainChoice.toLowerCase().equals('n')) {return;}
+                }
             }
         }
 

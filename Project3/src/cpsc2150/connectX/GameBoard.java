@@ -12,7 +12,7 @@ package cpsc2150.connectX;
  * Correspondence numToWin = NUMTOWIN
  * Correspondence this = board[0...MAXROWS-1][0...MAXCOLS]
  */
-public class GameBoard implements IGameBoard extends AbsGameBoard {
+public class GameBoard extends AbsGameBoard {
 
     /**
      * @invariant   No tokens can be placed outside of the game board.
@@ -30,10 +30,10 @@ public class GameBoard implements IGameBoard extends AbsGameBoard {
      * @pre     A new game has started.
      * @post    A new game board is created.
      */
-    public GameBoard(){
-        rows = MINROWS;
-        cols = MINCOLS;
-        numToWin = MINNUMTOWIN;
+    public GameBoard(int _rows, int _cols, int _numToWin){
+        rows = _rows;
+        cols = _cols;
+        numToWin = _numToWin;
         isTie = isWinner = false;
         board = new char[rows][cols];
         for(int i=0; i<rows; i++){
@@ -65,30 +65,6 @@ public class GameBoard implements IGameBoard extends AbsGameBoard {
 
     public int getNumToWin(){ return NUMTOWIN; }
 
-    public Boolean checkIfFree(int c){
-        //if the top space is blank, then the column isn't empty.
-        if(board[rows-1][c] == ' ') return true;
-        else return false;
-    }
-
-    public Boolean checkForWin(int c){
-        //get row number of latest position
-        int rowNum = rows-1;
-        while(board[rowNum][c] == ' '){
-            rowNum--;
-        }
-
-        //get character
-        char token = board[rowNum][c];
-        BoardPosition currPos = new BoardPosition(rowNum, c);
-
-        //check horizontal, vertical, and diagonal wins.
-        if(checkHorizWin(currPos, token)){return true;}
-        if(checkVertWin(currPos, token)){return true;}
-        if(checkDiagWin(currPos, token)){return true;}
-        else {return false;}
-    }
-
     public void placeToken(char p, int c){
 
         //is the column full?
@@ -103,187 +79,9 @@ public class GameBoard implements IGameBoard extends AbsGameBoard {
         }
     }
 
-    public Boolean checkHorizWin(BoardPosition pos, char p){
-
-        //initialize variables
-        boolean traverseRight = false;
-        int count = 1;
-        BoardPosition currPos = pos;
-
-        //while we haven't traversed right
-        while(!traverseRight){
-
-            //see if we can move to the right. If so, move right.
-            if(currPos.getColumn()+1 < MAXCOLS){
-                currPos = new BoardPosition(currPos.getRow(), (currPos.getColumn()+1));
-
-                //if the token is the same as p, increase the consecutive count. If not, move back to the original spot.
-                if(whatsAtPos(currPos) == p){
-                    count ++;
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else traverseRight = true;
-            } else traverseRight = true;
-        }
-
-        //reset the position.
-        //repeat this process for moving left
-        currPos = pos;
-        while(traverseRight){
-            if(currPos.getColumn()-1 >= 0){
-                currPos = new BoardPosition(currPos.getRow(), (currPos.getColumn()-1));
-                if(whatsAtPos(currPos) == p){
-                    count ++;
-
-                    //if we reached the number to win, return true
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else break;
-            } else break;
-        }
-
-        //otherwise return false
-        return false;
-    }
-
-    public Boolean checkVertWin(BoardPosition pos, char p){
-
-        //repeat the process for checkHorizWin for checkVertWin, except we only move down.
-        int count = 1;
-        BoardPosition currPos = pos;
-
-        while(count < numToWin){
-            if(currPos.getRow()-1 >= 0){
-                currPos = new BoardPosition((currPos.getRow()-1), currPos.getColumn());
-                if(whatsAtPos(currPos) == p){
-                    count++;
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else break;
-            } else break;
-        }
-
-        return false;
-
-    }
-
-    public Boolean checkDiagWin(BoardPosition pos, char p){
-
-        //initialize
-        int count = 1;
-        BoardPosition currPos = pos;
-
-        //Repeat the process in checkHorizWin for checkDiagWin, except for moving Southeast/Northwest, and southwest/northeast.
-        //move southeast
-        while(count < numToWin){
-            if(currPos.getRow()-1 >= 0 && currPos.getColumn()+1 < cols){
-                currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()+1));
-                if(whatsAtPos(currPos) == p){
-                    count++;
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else break;
-            } else break;
-        }
-
-        //reset the position
-        currPos = pos;
-
-        //move northwest
-        while(count < numToWin){
-            if(currPos.getRow()+1 < rows && currPos.getColumn()-1 >= 0){
-                currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()-1));
-                if(whatsAtPos(currPos) == p){
-                    count++;
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else break;
-            } else break;
-        }
-
-        //reset the position and consecutive token counter
-        currPos = pos;
-        count = 1;
-
-        //move southwest
-        while(count < numToWin){
-            if(currPos.getRow()-1 >= 0 && currPos.getColumn()-1 >= 0){
-                currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()-1));
-                if(whatsAtPos(currPos) == p){
-                    count++;
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else break;
-            } else break;
-        }
-
-        currPos = pos;
-
-        //move northeast
-        while(count < numToWin){
-            if(currPos.getRow()+1 < rows && currPos.getColumn()+1 < cols){
-                currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()+1));
-                if(whatsAtPos(currPos) == p){
-                    count++;
-                    if(count == numToWin){
-                        isWinner = true;
-                        return true;
-                    }
-                } else return false;
-            } else return false;
-        }
-
-        //no winner
-        return false;
-    }
-
     public char whatsAtPos(BoardPosition pos){
         //Return the character at position pos
         return board[pos.getRow()][pos.getColumn()];
-    }
-
-    public boolean isPlayerAtPos(BoardPosition pos, char player){
-        //check to see if the player at pos matches the player passed in.
-        char charAtPosition = whatsAtPos(pos);
-        if(player == charAtPosition) return true;
-        else return false;
-    }
-
-    /**
-     * @pre     A new turn has just begun.
-     * @post    This will make a string ready to print to the terminal.
-     * @return  A string representing the current board state.
-     */
-    @Override
-    public String toString(){
-        //initialize first row
-        String gameBoardString = "";
-        for(int i=0; i<cols; i++){
-            gameBoardString = gameBoardString.concat("|" + i); }
-        gameBoardString = gameBoardString.concat("|\n");
-
-        //fill in the rest of the game board
-        for(int r = rows-1; r >= 0; r--){
-            for(int c = 0; c < cols; c++){
-                gameBoardString = gameBoardString.concat("|" + board[r][c]);
-            }
-            gameBoardString = gameBoardString.concat("|\n");
-        }
-
-        //return the string
-        return gameBoardString;
     }
 
     public boolean checkTie(){

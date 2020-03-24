@@ -83,7 +83,13 @@ public interface IGameBoard {
      * @return  true if the column has one or more empty spaces.
      *          false if the column is full of tokens.
      */
-    public Boolean checkIfFree(int c);
+    public default Boolean checkIfFree(int c){
+        //make a board position on the top row (getnumRows()) and the specified column.
+        BoardPosition topPos = new BoardPosition(getNumRows(), c);
+        //if the top space is blank, then the column isn't empty.
+        if(whatsAtPos(topPos) == ' ') return true
+        else return false;
+    }
 
     /**
      * @pre     The player has already placed their token for the turn.
@@ -92,7 +98,24 @@ public interface IGameBoard {
      * @return  true if the player has won horizontally, diagonally, or vertically
      *          false if the player has not won.
      */
-    public Boolean checkForWin(int c);
+    public default Boolean checkForWin(int c){
+        //get row number of latest position
+        BoardPosition lastPos = new BoardPosition(rows-1, c);
+        while(whatsAtPos(lastPos) == ' '){
+            rowNum--;
+            lastPos = new BoardPosition(rowNum, c);
+        }
+        //now lastPos is at the position of the last token placed
+
+        //get character
+        char token = whatsAtPos(lastPos);
+
+        //check horizontal, vertical, and diagonal wins.
+        if(checkHorizWin(lastPos, token)){return true;}
+        if(checkVertWin(lastPos, token)){return true;}
+        if(checkDiagWin(lastPos, token)){return true;}
+        else {return false;}
+    }
 
     /**
      * @pre     The player has selected the column they want to place their token in.
@@ -110,7 +133,51 @@ public interface IGameBoard {
      * @return  true if the player won horizontally
      *          false if there is no winner.
      */
-    public Boolean checkHorizWin(BoardPosition pos, char p);
+    public default Boolean checkHorizWin(BoardPosition pos, char p){
+        //initialize variables
+        boolean traverseRight = false;
+        int count = 1;
+        BoardPosition currPos = pos;
+
+        //while we haven't traversed right
+        while(!traverseRight){
+
+            //see if we can move to the right. If so, move right.
+            if(currPos.getColumn()+1 < getNumRows()){
+                currPos = new BoardPosition(currPos.getRow(), (currPos.getColumn()+1));
+
+                //if the token is the same as p, increase the consecutive count. If not, move back to the original spot.
+                if(whatsAtPos(currPos) == p){
+                    count ++;
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else traverseRight = true;
+            } else traverseRight = true;
+        }
+
+        //reset the position.
+        //repeat this process for moving left
+        currPos = pos;
+        while(traverseRight){
+            if(currPos.getColumn()-1 >= 0){
+                currPos = new BoardPosition(currPos.getRow(), (currPos.getColumn()-1));
+                if(whatsAtPos(currPos) == p){
+                    count ++;
+
+                    //if we reached the number to win, return true
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else break;
+            } else break;
+        }
+
+        //otherwise return false
+        return false;
+    }
 
     /**
      * @pre     The player has placed their token for the turn.
@@ -120,7 +187,26 @@ public interface IGameBoard {
      * @return  true if the player won vertically
      *          false if there is no winner.
      */
-    public Boolean checkVertWin(BoardPosition pos, char p);
+    public default Boolean checkVertWin(BoardPosition pos, char p){
+        //repeat the process for checkHorizWin for checkVertWin, except we only move down.
+        int count = 1;
+        BoardPosition currPos = pos;
+
+        while(count < numToWin){
+            if(currPos.getRow()-1 >= 0){
+                currPos = new BoardPosition((currPos.getRow()-1), currPos.getColumn());
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else break;
+            } else break;
+        }
+
+        return false;
+    }
 
     /**
      * @pre     The player has placed their token for the turn.
@@ -130,14 +216,85 @@ public interface IGameBoard {
      * @return  true if the player won diagonally
      *          false if there is no winner.
      */
-    public Boolean checkDiagWin(BoardPosition pos, char p);
+    public default Boolean checkDiagWin(BoardPosition pos, char p){
+        //initialize
+        int count = 1;
+        BoardPosition currPos = pos;
+
+        //Repeat the process in checkHorizWin for checkDiagWin, except for moving Southeast/Northwest, and southwest/northeast.
+        //move southeast
+        while(count < getNumToWin()){
+            if(currPos.getRow()-1 >= 0 && currPos.getColumn()+1 < cols){
+                currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()+1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else break;
+            } else break;
+        }
+
+        //reset the position
+        currPos = pos;
+
+        //move northwest
+        while(count < getNumToWin()){
+            if(currPos.getRow()+1 < rows && currPos.getColumn()-1 >= 0){
+                currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()-1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else break;
+            } else break;
+        }
+
+        //reset the position and consecutive token counter
+        currPos = pos;
+        count = 1;
+
+        //move southwest
+        while(count < getNumToWin()){
+            if(currPos.getRow()-1 >= 0 && currPos.getColumn()-1 >= 0){
+                currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()-1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else break;
+            } else break;
+        }
+
+        currPos = pos;
+
+        //move northeast
+        while(count < getNumToWin()){
+            if(currPos.getRow()+1 < rows && currPos.getColumn()+1 < cols){
+                currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()+1));
+                if(whatsAtPos(currPos) == p){
+                    count++;
+                    if(count == getNumToWin()){
+                        isWinner = true;
+                        return true;
+                    }
+                } else return false;
+            } else return false;
+        }
+
+        //no winner
+        return false;
+    }
 
     /**
      * @pre     The board position to be checked exists.
      * @param pos The gameboard position to be checked.
-     * @return  "X" if an X is in the position.
-     *          "O" if an O is in the position.
-     *          " " if nothing is there.
+     * @return  The character at position pos on the board.
      */
     public char whatsAtPos(BoardPosition pos);
 
@@ -148,7 +305,11 @@ public interface IGameBoard {
      * @return  true if the player has a piece at the specified position
      *          false if the player doesn't have a piece at the specified position
      */
-    public boolean isPlayerAtPos(BoardPosition pos, char player);
+    public default boolean isPlayerAtPos(BoardPosition pos, char player){
+        //check to see if the player at pos matches the player passed in.
+        if(whatsAtPos(pos) == player) return true;
+        else return false;
+    }
 
     /**
      * @pre     No winner has been declared yet.
