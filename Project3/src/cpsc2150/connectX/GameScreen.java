@@ -20,8 +20,8 @@ public class GameScreen {
     private static int turn = 0;
     private static boolean onTurns = true;
     private static char currPlayer;
-    private static boolean playAgain;
-    private static GameBoard gameBoard;
+    private static boolean playAgain = true;
+    private static AbsGameBoard gameBoard;
 
     public static void main(String[] args){
 
@@ -48,15 +48,17 @@ public class GameScreen {
 
             //get players' tokens
             String tokenInput;
-            char newToken;
+            Character newToken;
             for(int i=1; i <= numPlayers; i++){
                 System.out.println("Enter the character to represent player " + i);
-                tokenInput = scanner.nextln();
-                newToken = tokenInput.charAt(0).toUpperCase();
+                tokenInput = scanner.nextLine();
+                newToken = tokenInput.charAt(0);
+                newToken = Character.toUpperCase(newToken);
                 while(tokens.contains(newToken)){
                     System.out.println(newToken + " is already taken as a player token!");
-                    tokenInput = scanner.nextln();
-                    newToken = tokenInput.charAt(0).toUpperCase();
+                    tokenInput = scanner.nextLine();
+                    newToken = tokenInput.charAt(0);
+                    newToken = Character.toUpperCase(newToken);
                 }
                 tokens.add(newToken);
             }
@@ -68,7 +70,7 @@ public class GameScreen {
                 if(rowInput < gameBoard.getMinRows()){ System.out.println("Board cannot be less than 3 rows."); }
                 else { System.out.println("Board cannot be greater than 100 rows."); }
                 System.out.println("How many rows should be on the board?");
-                int rowInput = scanner.nextInt();
+                rowInput = scanner.nextInt();
             }
 
             //get number of columns + input validation
@@ -81,7 +83,7 @@ public class GameScreen {
                     System.out.println("Board cannot be greater than 100 columns.");
                 }
                 System.out.println("How many columns should be on the board?");
-                int colInput = scanner.nextInt();
+                colInput = scanner.nextInt();
             }
 
             //get num to win + input validation
@@ -91,19 +93,19 @@ public class GameScreen {
                 if(ntwInput < gameBoard.getMinNumToWin()){ System.out.println("Number in a row to win cannot be greater than 25."); }
                 else { System.out.println("Number in a row to win cannot be greater than 25."); }
                 System.out.println("How many in a row to win?");
-                int ntwInput = scanner.nextInt();
+                ntwInput = scanner.nextInt();
             }
 
             //choose gameboard type
             System.out.println("Would you like a Fast Game (F/f) or a Memory Efficient Game (M/m)?");
-            char gameChoice = scanner.nextChar();
-            while(!gameChoice.toLowerCase.equals("f") || !gameChoice.toLowerCase.equals('n')){
+            String gameChoice = scanner.nextLine().toLowerCase();
+            while(!gameChoice.equals("f") || !gameChoice.equals('n')){
                 System.out.println("Please enter F or M");
                 System.out.println("Would you like a Fast Game (F/f) or a Memory Efficient Game (M/m)?");
-                gameChoice = scanner.nextChar();
+                gameChoice = scanner.nextLine().toLowerCase();
             }
-            if(gameChoice.toLowerCase.equals('f')){ gameBoard = new GameBoard(); }
-            else { gameBoard = new GameBoardMem(); }
+            if(gameChoice.equals('f')){ gameBoard = new GameBoard(rowInput, colInput, ntwInput); }
+            else { gameBoard = new GameBoardMem(rowInput, colInput, ntwInput); }
 
             //initialize gameboard rows and cols
             gameBoard.setRows(rowInput);
@@ -111,12 +113,12 @@ public class GameScreen {
             gameBoard.setNumToWin(ntwInput);
 
             //play through the turns
-            while(onTurns == true) {
+            while(onTurns) {
 
                 //print the gameboard, increment the turn counter, and get the current character
                 System.out.print(gameBoard.toString() + "\n");
                 turn++;
-                currPlayer = tokens.at(turn % numPlayers);
+                currPlayer = tokens.get(turn % numPlayers);
 
                 //get the players choice and perform bounds checking
                 choice = getPlayersChoice();
@@ -190,9 +192,12 @@ public class GameScreen {
     public GameScreen(){
 
         //create a new gameboard and initialize variables
-        gameBoard = new GameBoard();
-        isPlayerXturn = true;
-        playAgain = true;
+        int numPlayers = 0;
+        int minPlayers = 2;
+        int maxPlayers = 10;
+        int turn = 0;
+        boolean onTurns = true;
+        boolean playAgain = true;
     }
 
     /**

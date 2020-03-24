@@ -49,6 +49,12 @@ public class GameBoard extends AbsGameBoard {
 
     public void setNumToWin(int numToWinInput){ numToWin = numToWinInput; }
 
+    public int getNumRows(){ return rows; }
+
+    public int getNumColumns(){ return cols; }
+
+    public int getNumToWin(){ return numToWin; }
+
     public int getMaxRows(){ return MAXROWS; }
 
     public int getMaxCols(){ return MAXCOLS; }
@@ -57,13 +63,9 @@ public class GameBoard extends AbsGameBoard {
 
     public int getMinRows(){ return MINROWS; }
 
+    public int getMinCols(){ return MINCOLS; }
+
     public int getMinNumToWin(){ return MINNUMTOWIN; }
-
-    public int getNumRows(){ return NUMROWS; }
-
-    public int getNumColumns(){ return NUMCOLS; }
-
-    public int getNumToWin(){ return NUMTOWIN; }
 
     public void placeToken(char p, int c){
 
