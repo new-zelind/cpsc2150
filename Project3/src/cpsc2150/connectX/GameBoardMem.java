@@ -21,15 +21,9 @@ public class GameBoardMem extends AbsGameBoard {
         board = new HashMap<>();
     }
 
-    public void setRows(int rowsInput){
-        rows = rowsInput;
-        NUMROWS = rowsInput;
-    }
+    public void setRows(int rowsInput){ rows = rowsInput; }
 
-    public void setCols(int colsInput){
-        cols = colsInput;
-        NUMCOLS = colsInput;
-    }
+    public void setCols(int colsInput){ cols = colsInput; }
 
     public void setNumToWin(int numToWinInput){ numToWin = numToWinInput; }
 

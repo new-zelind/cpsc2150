@@ -21,8 +21,6 @@ public interface IGameBoard {
     public static final int MINROWS = 3;
     public static final int MINCOLS = 3;
     public static final int MINNUMTOWIN = 3;
-    public static final int NUMROWS;
-    public static final int NUMCOLS;
 
     public void setRows(int rowsInput);
 
@@ -89,7 +87,7 @@ public interface IGameBoard {
         //make a board position on the top row (getnumRows()) and the specified column.
         BoardPosition topPos = new BoardPosition(getNumRows(), c);
         //if the top space is blank, then the column isn't empty.
-        if(whatsAtPos(topPos) == ' ') return true
+        if(whatsAtPos(topPos) == ' ') return true;
         else return false;
     }
 
@@ -102,7 +100,8 @@ public interface IGameBoard {
      */
     public default Boolean checkForWin(int c){
         //get row number of latest position
-        BoardPosition lastPos = new BoardPosition(rows-1, c);
+        int rowNum = getNumRows()-1;
+        BoardPosition lastPos = new BoardPosition(getNumRows()-1, c);
         while(whatsAtPos(lastPos) == ' '){
             rowNum--;
             lastPos = new BoardPosition(rowNum, c);
@@ -152,7 +151,6 @@ public interface IGameBoard {
                 if(whatsAtPos(currPos) == p){
                     count ++;
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else traverseRight = true;
@@ -170,7 +168,6 @@ public interface IGameBoard {
 
                     //if we reached the number to win, return true
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else break;
@@ -194,13 +191,12 @@ public interface IGameBoard {
         int count = 1;
         BoardPosition currPos = pos;
 
-        while(count < numToWin){
+        while(count < getNumToWin()){
             if(currPos.getRow()-1 >= 0){
                 currPos = new BoardPosition((currPos.getRow()-1), currPos.getColumn());
                 if(whatsAtPos(currPos) == p){
                     count++;
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else break;
@@ -226,12 +222,11 @@ public interface IGameBoard {
         //Repeat the process in checkHorizWin for checkDiagWin, except for moving Southeast/Northwest, and southwest/northeast.
         //move southeast
         while(count < getNumToWin()){
-            if(currPos.getRow()-1 >= 0 && currPos.getColumn()+1 < cols){
+            if(currPos.getRow()-1 >= 0 && currPos.getColumn()+1 < getNumColumns()){
                 currPos = new BoardPosition((currPos.getRow()-1), (currPos.getColumn()+1));
                 if(whatsAtPos(currPos) == p){
                     count++;
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else break;
@@ -243,12 +238,11 @@ public interface IGameBoard {
 
         //move northwest
         while(count < getNumToWin()){
-            if(currPos.getRow()+1 < rows && currPos.getColumn()-1 >= 0){
+            if(currPos.getRow()+1 < getNumRows() && currPos.getColumn()-1 >= 0){
                 currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()-1));
                 if(whatsAtPos(currPos) == p){
                     count++;
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else break;
@@ -266,7 +260,6 @@ public interface IGameBoard {
                 if(whatsAtPos(currPos) == p){
                     count++;
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else break;
@@ -277,12 +270,11 @@ public interface IGameBoard {
 
         //move northeast
         while(count < getNumToWin()){
-            if(currPos.getRow()+1 < rows && currPos.getColumn()+1 < cols){
+            if(currPos.getRow()+1 < getNumRows() && currPos.getColumn()+1 < getNumColumns()){
                 currPos = new BoardPosition((currPos.getRow()+1), (currPos.getColumn()+1));
                 if(whatsAtPos(currPos) == p){
                     count++;
                     if(count == getNumToWin()){
-                        isWinner = true;
                         return true;
                     }
                 } else return false;

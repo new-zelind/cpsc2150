@@ -12,41 +12,26 @@ public abstract class AbsGameBoard implements IGameBoard {
      */
     @Override
     public String toString(){
-        /*//initialize first row
-        String gameBoardString = "";
-        for(int i=0; i<cols; i++){
-            gameBoardString = gameBoardString.concat("|" + i); }
-        gameBoardString = gameBoardString.concat("|\n");
-
-        //fill in the rest of the game board
-        for(int r = rows-1; r >= 0; r--){
-            for(int c = 0; c < cols; c++){
-                gameBoardString = gameBoardString.concat("|" + board[r][c]);
-            }
-            gameBoardString = gameBoardString.concat("|\n");
-        }
-
-        //return the string
-        return gameBoardString;*/
-
         String boardString = "";
-        for(int i=0; i<NUMCOLS; i++){
+        for(int i=0; i<getNumColumns(); i++){
             String header = String.format("|%2d", i);
             boardString = boardString.concat(header);
         }
         boardString = boardString.concat("|\n");
 
         BoardPosition pos;
-        for(int r = NUMROWS-1; r>=0; r--){
-            for(int c = 0; c < NUMCOLS; c++){ //no, this is java
+        for(int r = getNumRows()-1; r>=0; r--){
+            for(int c = 0; c < getNumColumns(); c++){ //no, this is java
                 pos = new BoardPosition(r, c);
-                String toAdd = whatsAtPos(pos);
-                String body = String.format("|%-2", toAdd);
+                char toAdd = whatsAtPos(pos);
+                String body = String.format("|%-2s", toAdd);
                 boardString = boardString.concat(body);
             }
             boardString = boardString.concat("|\n");
         }
         boardString = boardString.concat("\n");
+
+        return boardString;
     }
 
 

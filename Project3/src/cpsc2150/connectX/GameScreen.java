@@ -21,7 +21,7 @@ public class GameScreen {
     private static boolean onTurns = true;
     private static char currPlayer;
     private static boolean playAgain = true;
-    private static AbsGameBoard gameBoard;
+    private static IGameBoard gameBoard;
 
     public static void main(String[] args){
 
@@ -30,9 +30,10 @@ public class GameScreen {
         int choice;
         String playAgainChoice;
         List<Character> tokens = new ArrayList<>();
+        gameBoard = new GameBoard(5, 5, 5);
 
         //while the player wants to play again
-        while(!playAgain){
+        while(playAgain){
 
             turn = 0;
 
@@ -40,25 +41,23 @@ public class GameScreen {
             System.out.println("How many players?");
             numPlayers = scanner.nextInt();
             while(numPlayers < minPlayers || numPlayers > maxPlayers){
-                if(numPlayers < minPlayers){ System.out.println("Must be at least " + maxPlayers + " players"); }
-                else {System.out.println("Must be " + minPlayers + " players or fewer"); }
+                if(numPlayers < minPlayers){ System.out.println("Must be at least " + minPlayers + " players"); }
+                else {System.out.println("Must be " + maxPlayers + " players or fewer"); }
                 System.out.println("How many players?");
                 numPlayers = scanner.nextInt();
             }
 
             //get players' tokens
-            String tokenInput;
+            char tokenInput;
             Character newToken;
             for(int i=1; i <= numPlayers; i++){
                 System.out.println("Enter the character to represent player " + i);
-                tokenInput = scanner.nextLine();
-                newToken = tokenInput.charAt(0);
-                newToken = Character.toUpperCase(newToken);
+                tokenInput = scanner.next().charAt(0);
+                newToken = Character.toUpperCase(tokenInput);
                 while(tokens.contains(newToken)){
                     System.out.println(newToken + " is already taken as a player token!");
-                    tokenInput = scanner.nextLine();
-                    newToken = tokenInput.charAt(0);
-                    newToken = Character.toUpperCase(newToken);
+                    tokenInput = scanner.next().charAt(0);
+                    newToken = Character.toUpperCase(tokenInput);
                 }
                 tokens.add(newToken);
             }
@@ -98,11 +97,11 @@ public class GameScreen {
 
             //choose gameboard type
             System.out.println("Would you like a Fast Game (F/f) or a Memory Efficient Game (M/m)?");
-            String gameChoice = scanner.nextLine().toLowerCase();
-            while(!gameChoice.equals("f") || !gameChoice.equals('n')){
+            Character gameChoice = scanner.next().charAt(0);
+            while(gameChoice.equals("f") || gameChoice.equals('n')){
                 System.out.println("Please enter F or M");
                 System.out.println("Would you like a Fast Game (F/f) or a Memory Efficient Game (M/m)?");
-                gameChoice = scanner.nextLine().toLowerCase();
+                gameChoice = scanner.next().charAt(0);
             }
             if(gameChoice.equals('f')){ gameBoard = new GameBoard(rowInput, colInput, ntwInput); }
             else { gameBoard = new GameBoardMem(rowInput, colInput, ntwInput); }
@@ -117,7 +116,6 @@ public class GameScreen {
 
                 //print the gameboard, increment the turn counter, and get the current character
                 System.out.print(gameBoard.toString());
-                turn++;
                 currPlayer = tokens.get(turn % numPlayers);
 
                 //get the players choice and perform bounds checking
@@ -181,6 +179,8 @@ public class GameScreen {
                     //if not, end the game
                     if(playAgainChoice.toLowerCase().equals('n')) {return;}
                 }
+
+                turn++;
             }
         }
 

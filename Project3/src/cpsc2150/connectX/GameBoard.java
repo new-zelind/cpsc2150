@@ -43,15 +43,9 @@ public class GameBoard extends AbsGameBoard {
         }
     }
 
-    public void setRows(int rowsInput){
-        rows = rowsInput;
-        NUMROWS = rowsInput;
-    }
+    public void setRows(int rowsInput){ rows = rowsInput; }
 
-    public void setCols(int colsInput){
-        cols = colsInput;
-        NUMCOLS = colsInput;
-    }
+    public void setCols(int colsInput){ cols = colsInput; }
 
     public void setNumToWin(int numToWinInput){ numToWin = numToWinInput; }
 
