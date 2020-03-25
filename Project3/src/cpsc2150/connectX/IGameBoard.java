@@ -21,6 +21,8 @@ public interface IGameBoard {
     public static final int MINROWS = 3;
     public static final int MINCOLS = 3;
     public static final int MINNUMTOWIN = 3;
+    public static final int NUMROWS;
+    public static final int NUMCOLS;
 
     public void setRows(int rowsInput);
 

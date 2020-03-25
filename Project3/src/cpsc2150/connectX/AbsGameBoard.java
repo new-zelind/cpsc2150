@@ -12,7 +12,7 @@ public abstract class AbsGameBoard implements IGameBoard {
      */
     @Override
     public String toString(){
-        //initialize first row
+        /*//initialize first row
         String gameBoardString = "";
         for(int i=0; i<cols; i++){
             gameBoardString = gameBoardString.concat("|" + i); }
@@ -27,7 +27,26 @@ public abstract class AbsGameBoard implements IGameBoard {
         }
 
         //return the string
-        return gameBoardString;
+        return gameBoardString;*/
+
+        String boardString = "";
+        for(int i=0; i<NUMCOLS; i++){
+            String header = String.format("|%2d", i);
+            boardString = boardString.concat(header);
+        }
+        boardString = boardString.concat("|\n");
+
+        BoardPosition pos;
+        for(int r = NUMROWS-1; r>=0; r--){
+            for(int c = 0; c < NUMCOLS; c++){ //no, this is java
+                pos = new BoardPosition(r, c);
+                String toAdd = whatsAtPos(pos);
+                String body = String.format("|%-2", toAdd);
+                boardString = boardString.concat(body);
+            }
+            boardString = boardString.concat("|\n");
+        }
+        boardString = boardString.concat("\n");
     }
 
 

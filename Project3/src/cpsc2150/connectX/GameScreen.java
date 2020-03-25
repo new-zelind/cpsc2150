@@ -116,7 +116,7 @@ public class GameScreen {
             while(onTurns) {
 
                 //print the gameboard, increment the turn counter, and get the current character
-                System.out.print(gameBoard.toString() + "\n");
+                System.out.print(gameBoard.toString());
                 turn++;
                 currPlayer = tokens.get(turn % numPlayers);
 
@@ -191,7 +191,7 @@ public class GameScreen {
      */
     public GameScreen(){
 
-        //create a new gameboard and initialize variables
+        //initialize variables
         int numPlayers = 0;
         int minPlayers = 2;
         int maxPlayers = 10;
