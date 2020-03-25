@@ -142,6 +142,8 @@ public class GameScreen {
                 //place the appropriate token in the board
                 gameBoard.placeToken(currPlayer, choice);
 
+                turn++;
+
                 //check to see if the player won
                 if(gameBoard.checkForWin(choice)){
 
@@ -153,10 +155,14 @@ public class GameScreen {
                     //see if the player wants to play again and perform bounds checking
                     System.out.println("Would you like to play again?");
                     playAgainChoice = scanner.next();
-                    while(!playAgainChoice.toLowerCase().equals('y') && !playAgainChoice.toLowerCase().equals('n')){
+                    while(playAgainChoice.toLowerCase().equals('y') && playAgainChoice.toLowerCase().equals('n')){
                         System.out.println("Would you like to play again?");
                         playAgainChoice = scanner.next();
                     }
+
+                    turn = 0;
+                    onTurns = false;
+                    tokens.clear();
 
                     //if not, end the game
                     if(playAgainChoice.toLowerCase().equals('n')) {return;}
@@ -176,11 +182,13 @@ public class GameScreen {
                         playAgainChoice = scanner.next();
                     }
 
+                    turn = 0;
+                    onTurns = false;
+                    tokens.clear();
+
                     //if not, end the game
                     if(playAgainChoice.toLowerCase().equals('n')) {return;}
                 }
-
-                turn++;
             }
         }
 
@@ -192,17 +200,16 @@ public class GameScreen {
     public GameScreen(){
 
         //initialize variables
-        int numPlayers = 0;
-        int minPlayers = 2;
-        int maxPlayers = 10;
-        int turn = 0;
-        boolean onTurns = true;
-        boolean playAgain = true;
+        numPlayers = 0;
+        minPlayers = 2;
+        maxPlayers = 10;
+        turn = 0;
+        onTurns = true;
+        playAgain = true;
     }
 
     /**
      * @pre     The player has not entered a legal column choice.
-     * @post    This function will get where the player wants to place their token.
      * @return  The player's chosen column.
      */
     private static int getPlayersChoice(){

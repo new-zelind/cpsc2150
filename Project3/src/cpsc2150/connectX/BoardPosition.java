@@ -37,7 +37,6 @@ public class BoardPosition {
 
     /**
      * @param position An instance of the BoardPosition class.
-     * @post    Check to see whether two board positions are equal.
      * @return  true if the two positions have the same row and column.
      *          false if the two positions have different rows or columns.
      */

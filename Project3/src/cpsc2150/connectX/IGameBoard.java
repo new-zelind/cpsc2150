@@ -3,14 +3,19 @@ package cpsc2150.connectX;
 /**
  * Created by zelindl on 2/25/20.
  *
- * @defines MAXROWS:  Z - the maximum number of rows in the game board
- *          MAXCOLS:  Z - the maximum number of columns in the game board
- *          NUMTOWIN: Z - the number of tokens in a row required to win
+ * @defines MAXROWS:        Z - the maximum number of rows in the game board
+ *          MAXCOLS:        Z - the maximum number of columns in the game board
+ *          MAXNUMTOWIN:    Z - the maximum number of tokens in a row required to win
+ *          MINROWS:        Z - the minimum number of rows in the game board
+ *          MINCOLS:        Z - the minimum number of columns in the game board
+ *          MINNUMTOWIN:    Z - the minimum number of tokens in a row required to win
  *
- * @initialization  ensures the game board is full of blank characters and is size MAXROWS x MAXCOLS.
+ * @initialization  ensures an empty gameboard with size at most MAXROWS x MAXCOLS
  *
- * @constraints MAXROWS > 0 && MAXCOLS >0
- *              0 < NUMTOWIN <= (MAXROWS || MAXCOLS)
+ * @constraints MAXROWS = MAXCOLS = 100
+ *              MAXNUMTOWIN = 25
+ *              MINROWS = MINCOLS = MINNUMTOWIN = 3
+ *              MAXROWS = MAXCOLS > MAXNUMTOWIN > MINNUMTOWIN >= MINROWS = MINCOLS
  *
  */
 public interface IGameBoard {
@@ -79,13 +84,12 @@ public interface IGameBoard {
     /**
      * @pre     A player wants to place a token.
      * @param c The column the player wants to place a token in.
-     * @post    The function will tell us if the column can be played in or not.
      * @return  true if the column has one or more empty spaces.
      *          false if the column is full of tokens.
      */
     public default Boolean checkIfFree(int c){
         //make a board position on the top row (getnumRows()) and the specified column.
-        BoardPosition topPos = new BoardPosition(getNumRows(), c);
+        BoardPosition topPos = new BoardPosition(getNumRows()-1, c);
         //if the top space is blank, then the column isn't empty.
         if(whatsAtPos(topPos) == ' ') return true;
         else return false;
@@ -94,7 +98,6 @@ public interface IGameBoard {
     /**
      * @pre     The player has already placed their token for the turn.
      * @param c The column the player placed their token in.
-     * @post    The player has either won, or not.
      * @return  true if the player has won horizontally, diagonally, or vertically
      *          false if the player has not won.
      */
@@ -122,7 +125,7 @@ public interface IGameBoard {
      * @pre     The player has selected the column they want to place their token in.
      * @param p The token to be placed
      * @param c The column that the player chose
-     * @post
+     * @post    Token p was placed in column c
      */
     public void placeToken(char p, int c);
 
@@ -130,7 +133,6 @@ public interface IGameBoard {
      * @pre     The player has placed their token for the turn.
      * @param pos The board position that the token went into.
      * @param p   The token that was placed.
-     * @post    There will either be a winner, or it will move to the next turn.
      * @return  true if the player won horizontally
      *          false if there is no winner.
      */
@@ -182,7 +184,6 @@ public interface IGameBoard {
      * @pre     The player has placed their token for the turn.
      * @param pos The board position that the token went into.
      * @param p   The token that was placed.
-     * @post    There will either be a winner, or it will move to the next turn.
      * @return  true if the player won vertically
      *          false if there is no winner.
      */
@@ -210,7 +211,6 @@ public interface IGameBoard {
      * @pre     The player has placed their token for the turn.
      * @param pos The board position that the token went into.
      * @param p   The token that was placed.
-     * @post    There will either be a winner, or it will move to the next turn.
      * @return  true if the player won diagonally
      *          false if there is no winner.
      */
@@ -301,8 +301,7 @@ public interface IGameBoard {
      */
     public default boolean isPlayerAtPos(BoardPosition pos, char player){
         //check to see if the player at pos matches the player passed in.
-        if(whatsAtPos(pos) == player) return true;
-        else return false;
+        return whatsAtPos(pos) == player;
     }
 
     /**

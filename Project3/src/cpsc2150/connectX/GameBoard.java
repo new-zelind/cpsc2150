@@ -2,14 +2,17 @@ package cpsc2150.connectX;
 
 /**
  * Created by zelindl on 2/6/20.
- * 
- * @invariant 0 < rows
- * @invariant 0 < cols
- * @invariant 0 < numToWin
  *
- * Correspondence rows = MAXROWS
- * Correspondence cols - MAXCOLS
- * Correspondence numToWin = NUMTOWIN
+ * @invariant   A piece cannot be placed in a full stack
+ * @invariant   Each placed piece stacks on top of the one below it
+ * @invariant   There can be no spaces between vertical tokens
+ * @invariant   The board is of size rows x cols
+ * @invariant   The bottom left of the gameboard is (0, 0)
+ * @invariant   A piece cannot be placed out of bounds
+ *
+ * Correspondence MINROWS <= rows <= MAXROWS
+ * Correspondence MINCOLS <= cols <= MAXCOLS
+ * Correspondence MINNUMTOWIN <= numToWin <= MAXNUMTOWIN
  * Correspondence this = board[0...MAXROWS-1][0...MAXCOLS]
  */
 public class GameBoard extends AbsGameBoard {
@@ -25,8 +28,11 @@ public class GameBoard extends AbsGameBoard {
     private char[][] board;
 
     /**
-     * @pre     A new game has started.
-     * @post    A new game board is created.
+     * @param _rows     the number of rows in the board
+     * @param _cols     the number of columns in the board
+     * @param _numToWin the number of tokens in a row required to win
+     * @pre     MINROWS <= rows <= MAXROWS && MINCOLS <= cols MAXCOLS && MINNUMTOWIN <= numToWin <= MAXNUMTOWIN
+     * @post    a new board represented by a 2d array of blank characters is created
      */
     public GameBoard(int _rows, int _cols, int _numToWin){
         rows = _rows;
