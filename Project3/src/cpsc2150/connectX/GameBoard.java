@@ -23,8 +23,6 @@ public class GameBoard extends AbsGameBoard {
     private int cols;
     private int numToWin;
     private char[][] board;
-    private boolean isWinner;
-    private boolean isTie;
 
     /**
      * @pre     A new game has started.
@@ -34,7 +32,6 @@ public class GameBoard extends AbsGameBoard {
         rows = _rows;
         cols = _cols;
         numToWin = _numToWin;
-        isTie = isWinner = false;
         board = new char[rows][cols];
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
@@ -68,17 +65,12 @@ public class GameBoard extends AbsGameBoard {
     public int getMinNumToWin(){ return MINNUMTOWIN; }
 
     public void placeToken(char p, int c){
-
-        //is the column full?
-        if(checkIfFree(c)){
-
-            //if not, move up to the first open slot and place the token.
-            int i = 0;
-            while(board[i][c] != ' '){
-                i++;
-            }
-            board[i][c] = p;
+        //if not, move up to the first open slot and place the token.
+        int i = 0;
+        while(board[i][c] != ' '){
+            i++;
         }
+        board[i][c] = p;
     }
 
     public char whatsAtPos(BoardPosition pos){
@@ -101,7 +93,6 @@ public class GameBoard extends AbsGameBoard {
         }
 
         //otherwise, the game is a draw.
-        isTie = true;
         return true;
     }
 }

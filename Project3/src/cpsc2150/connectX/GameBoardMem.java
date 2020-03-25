@@ -10,8 +10,6 @@ public class GameBoardMem extends AbsGameBoard {
     private int rows;
     private int cols;
     private int numToWin;
-    private boolean isWinner;
-    private boolean isTie;
     private Map<Character, List<BoardPosition>> board;
 
     public GameBoardMem(int _rows, int _cols, int _numToWin){
@@ -46,20 +44,10 @@ public class GameBoardMem extends AbsGameBoard {
     public int getMinNumToWin(){ return MINNUMTOWIN; }
 
     public void placeToken(char p, int c){
-        /*for(int i=1; i<rows; i++){
-            pos = new BoardPosition(i, c);
-            if(whatsAtPos(pos).equals(pos)){ break; }
-        }
-        if(!board.containsKey(p)){
-            board.put(p, new ArrayList<>());
-            board.get(p).add(pos);
-            return;
-        }
-        else{ board.get(p).add(pos); }*/
-
         BoardPosition pos;
         for(int i=1; i<=rows; i++){
             pos = new BoardPosition(i, c);
+            char test = whatsAtPos(pos);
             if(whatsAtPos(pos) == ' '){
                 if(!board.containsKey(p)){
                     board.put(p, new ArrayList<>());
@@ -92,7 +80,6 @@ public class GameBoardMem extends AbsGameBoard {
             }
         }
 
-        isTie = true;
         return true;
     }
 

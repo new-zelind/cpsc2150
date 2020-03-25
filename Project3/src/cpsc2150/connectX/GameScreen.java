@@ -89,8 +89,8 @@ public class GameScreen {
             System.out.println("How many in a row to win?");
             int ntwInput = scanner.nextInt();
             while(ntwInput < gameBoard.getMinNumToWin() || ntwInput > gameBoard.getMaxNumToWin()){
-                if(ntwInput < gameBoard.getMinNumToWin()){ System.out.println("Number in a row to win cannot be greater than 25."); }
-                else { System.out.println("Number in a row to win cannot be greater than 25."); }
+                if(ntwInput > gameBoard.getMinNumToWin()){ System.out.println("Number in a row to win cannot be greater than 25."); }
+                else { System.out.println("Number in a row to win cannot be less than 3."); }
                 System.out.println("How many in a row to win?");
                 ntwInput = scanner.nextInt();
             }
