@@ -20,7 +20,7 @@ public class ShuffleApp {
 
         for(int i = 1; i <= num_shuffles; i++)
         {
-            sl.shuffle(num_swaps);
+            sl.shuffle(num_shuffles);
             System.out.println("Shuffled " + i + " times:");
             System.out.println(sl.toString());
         }

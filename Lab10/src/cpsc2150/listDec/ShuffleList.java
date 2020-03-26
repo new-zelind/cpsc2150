@@ -1,45 +1,22 @@
 package cpsc2150.listDec;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Collection;
+import java.util.*;
 
 public class ShuffleList<T> implements IShuffleList<T> {
-    List<T> myList;
+    private List<T> myList;
 
-    public ShuffleList(List<T> l)
-    {
-        myList = l;
-    }
+    public ShuffleList(List<T> l){ myList = l; }
 
-    public boolean add(T e){
-       //complete this method
+    public boolean add(T e){ return myList.add(e); }
 
-    }
+    public T get(int i){ return myList.get(i); }
 
-    public T get(int i)
-    {
-        //complete this method
-    }
+    public void add(int index, T e){ myList.add(index, e); }
 
-    public void add(int index, T e){
-        //complete this method
-    }
+    public int size(){ return myList.size(); }
 
-    public int size()
-    {
-        //complete this method
-    }
+    public void clear(){ myList.clear(); }
 
-    public void clear()
-    {
-        //complete this method
-    }
-
-    public T set(int i, T x)
-    {
-        //complete this method
-    }
+    public T set(int i, T x) { return myList.set(i, x); }
 
     public List<T> subList(int i, int j)
     {
@@ -135,7 +112,6 @@ public class ShuffleList<T> implements IShuffleList<T> {
     public Object[] toArray(){
         return myList.toArray();
     }
-
 
     public Object[] toArray(Object[] ts){
         return myList.toArray(ts);
