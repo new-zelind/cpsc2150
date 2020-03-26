@@ -113,7 +113,6 @@ public class ShuffleList<T> implements IShuffleList<T> {
         return myList.toArray();
     }
 
-    public Object[] toArray(Object[] ts){
-        return myList.toArray(ts);
-    }
+    @SuppressWarnings("unchecked")
+    public Object[] toArray(Object[] ts){ return myList.toArray(ts); }
 }
