@@ -65,35 +65,25 @@ public class GameBoardMem extends AbsGameBoard {
     public int getMinNumToWin(){ return MINNUMTOWIN; }
 
     public void placeToken(char p, int c){
-        /*BoardPosition pos;
-        for(int i=0; i<rows; i++){
-            pos = new BoardPosition(i, c);
-            if(whatsAtPos(pos) == ' '){
-                if(!board.containsKey(p)){
-                    board.putIfAbsent(p, new ArrayList<>());
-                    board.get(p).add(pos);
-                    return;
-                }
-            }
-            else{ board.get(p).add(pos); }
-        }*/
-
+        //if the key is absent, start a new list of positions
         board.putIfAbsent(p, new ArrayList<>());
         BoardPosition insertPos = new BoardPosition(0, c);
         int i = 0;
+        //iterate until we find the next available position in the column
         while(whatsAtPos(insertPos) != ' '){
             insertPos = new BoardPosition(i, c);
             i++;
         }
-        /*for(int i=0; whatsAtPos(insertPos) != ' '; i++){
-            insertPos = new BoardPosition(i, c);
-        }*/
+        //insert the token into the board
         board.get(p).add(insertPos);
     }
 
     public char whatsAtPos(BoardPosition pos){
+        //loop through each key
         for(Map.Entry<Character, List<BoardPosition>> m : board.entrySet()){
+            //loop through each member in the list
             for(int i = 0; i<m.getValue().size(); i++){
+                //if we find the specific boardPosition, return the key
                 if(m.getValue().get(i).equals(pos)){
                     return m.getKey();
                 }
@@ -104,10 +94,12 @@ public class GameBoardMem extends AbsGameBoard {
 
     public boolean checkTie(){
 
+        //check each individual position
         BoardPosition currPos;
         for(int i=0; i<rows; i++){
             for(int j=0; j<cols; j++){
                 currPos = new BoardPosition(i, j);
+                //if we find a space, it's not a tie
                 if(whatsAtPos(currPos) == ' '){ return false; }
             }
         }

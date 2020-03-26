@@ -36,6 +36,7 @@ public class GameScreen {
         while(playAgain){
 
             turn = 0;
+            onTurns = true;
 
             //get number of players + input validation
             System.out.println("How many players?");
