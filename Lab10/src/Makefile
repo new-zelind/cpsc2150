@@ -1,8 +1,8 @@
 default:
-	  javac /cpsc2150/listDec/*.java
+		 javac cpsc2150/listDec/ShuffleApp.java cpsc2150/listDec/ShuffleList.java cpsc2150/listDec/IShuffleList.java
 
-run:
-	  java /cpsc2150/listDec/ShuffleApp
+run:  cpsc2150/listDec/ShuffleApp.class cpsc2150/listDec/ShuffleList.class cpsc2150/listDec/IShuffleList.class
+		 java cpsc2150.listDec.ShuffleApp
 
 clean:
-	  rm -f /cpsc2150/listDec/*.class
+		 rm -f ./cpsc2150/listDec/*.class
