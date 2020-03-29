@@ -10,7 +10,7 @@ public interface IShuffleList<T> extends List<T> {
      * @pre:    List.size() >= 2
      * @pre:    swaps > 0
      * @param swaps: the number of individual swaps that should take place
-     * @post:   List.at(1) = List.at(rand), List.at(2) = List.at(rand), ... List.at(n) = List.at(rand)
+     * @post:   List.at(1) = #List.at(rand), List.at(2) = #List.at(rand), ... List.at(n) = #List.at(rand)
      */
     default void shuffle(int swaps){
         int rand1, rand2;
