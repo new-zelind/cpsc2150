@@ -21,19 +21,19 @@ public class MortgageController implements IMortgageController{
 
             double income = view.getYearlyIncome();
             while (income <= 0) {
-                view.yearlyIncomeError();
+                view.printToUser("Income must be greater than 0.\n");
                 income = view.getYearlyIncome();
             }
 
             double debt = view.getMonthlyDebt();
             while (debt < 0) {
-                view.monthlyDebtError();
+                view.printToUser("Debt must be greater than or equal to 0.\n");
                 debt = view.getMonthlyDebt();
             }
 
             int creditScore = view.getCreditScore();
             while (creditScore <= 0 || creditScore >= 850) {
-                view.creditScoreError();
+                view.printToUser("Credit score must be greater than 0 and less than 850.\n");
                 creditScore = view.getCreditScore();
             }
 
@@ -44,19 +44,19 @@ public class MortgageController implements IMortgageController{
 
                 double cost = view.getHouseCost();
                 while (cost <= 0) {
-                    view.houseCostError();
+                    view.printToUser("Cost must be greater than 0.\n");
                     cost = view.getHouseCost();
                 }
 
                 double downPayment = view.getDownPayment();
                 while (downPayment < 0 || downPayment > cost) {
-                    view.downPaymentError();
+                    view.printToUser("Down payment must be greater than 0 and less than the cost of the house.\n");
                     downPayment = view.getDownPayment();
                 }
 
                 int years = view.getYears();
                 while (years < 0) {
-                    view.yearsError();
+                    view.printToUser("Years must be greater than 0.\n");
                     years = view.getYears();
                 }
 

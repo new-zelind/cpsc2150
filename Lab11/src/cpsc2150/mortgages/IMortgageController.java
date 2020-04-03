@@ -15,8 +15,4 @@ public interface IMortgageController {
      * @post: none
      */
     void submitApplication();
-
-
-
-
 }

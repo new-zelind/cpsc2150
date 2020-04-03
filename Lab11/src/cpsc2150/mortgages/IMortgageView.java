@@ -23,15 +23,12 @@ public interface IMortgageView {
      */
     double getHouseCost();
 
-    void houseCostError();
-
     /**
      *
      * @return the down payment provided by the user
      */
     double getDownPayment();
 
-    void downPaymentError();
 
     /**
      *
@@ -39,7 +36,6 @@ public interface IMortgageView {
      */
     int getYears();
 
-    void yearsError();
 
     /**
      *
@@ -47,7 +43,6 @@ public interface IMortgageView {
      */
     double getMonthlyDebt();
 
-    void monthlyDebtError();
 
     /**
      *
@@ -55,7 +50,6 @@ public interface IMortgageView {
      */
     double getYearlyIncome();
 
-    void yearlyIncomeError();
 
     /**
      *
@@ -63,7 +57,6 @@ public interface IMortgageView {
      */
     int getCreditScore();
 
-    void creditScoreError();
 
     /**
      *
