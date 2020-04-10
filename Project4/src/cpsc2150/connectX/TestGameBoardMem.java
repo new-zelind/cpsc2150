@@ -530,4 +530,135 @@ public class TestGameBoardMem {
         assertEquals(gb.checkDiagWin(winner, 'X'), false);
     }
 
+    /*
+     TESTING CHECKTIE
+     */
+
+    @Test
+    public void testCheckTieOneColEmpty(){
+        IGameBoard gb = GameBoardFactory(5, 5, 4);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('X', 3);
+        gb.placeToken('O', 4);
+
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('X', 3);
+        gb.placeToken('O', 4);
+
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+        assertEquals(gb.checkTie(), false);
+    }
+
+    @Test
+    public void testCheckTieOneRowEmpty(){
+        IGameBoard gb = GameBoardFactory(5, 5, 4);
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 0);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 0);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('X', 3);
+        gb.placeToken('O', 4);
+
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+        assertEquals(gb.checkTie(), false);
+    }
+
+    @Test
+    public void testcheckTieOneSpaceEmpty(){
+        IGameBoard gb = GameBoardFactory(5, 5, 4);
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 0);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 0);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('X', 3);
+        gb.placeToken('O', 4);
+
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        assertEquals(gb.checkTie(), false);
+    }
+
+    @Test
+    public void checkTieFullBoard(){
+        IGameBoard gb = GameBoardFactory(5, 5, 4);
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 0);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('O', 0);
+        gb.placeToken('X', 1);
+        gb.placeToken('O', 2);
+        gb.placeToken('X', 3);
+        gb.placeToken('O', 4);
+
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        gb.placeToken('X', 4);
+
+        gb.placeToken('X', 0);
+        gb.placeToken('O', 1);
+        gb.placeToken('X', 2);
+        gb.placeToken('O', 3);
+        assertEquals(gb.checkTie(), false);
+    }
+
 }
