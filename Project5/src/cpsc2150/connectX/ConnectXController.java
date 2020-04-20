@@ -87,18 +87,21 @@ public class ConnectXController {
         screen.setMarker(row, col, currToken);
         turns++;
 
+        //check for a win and alert the player if true
         if(curGame.checkForWin(col)){
             screen.setMessage("Player" + currToken + " won! Click any button to start a new game.");
             gameOver = true;
             return;
         }
 
+        //check for a tie and alert the player if true
         if(curGame.checkTie()){
             screen.setMessage("This game is a tie! Click any button to start a new game.");
             gameOver = true;
             return;
         }
 
+        //display that it is the next player's turn.
         screen.setMessage("It is " + tokens[(turns % numPlayers)] + "'s turn.");
     }
 
