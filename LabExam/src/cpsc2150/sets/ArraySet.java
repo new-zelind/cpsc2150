@@ -4,33 +4,42 @@ import java.util.*;
 
 public class ArraySet<T> extends SetAbs<T> implements ISet<T> {
 
-    private ArrayList<T> arraySet;
+    private T[] arraySet;
+    private int depth;
 
     /**
      * @post: [set is empty]
      *
      */
+    @SuppressWarnings("unchecked")
     public ArraySet(){
-        arraySet = new ArrayList<>();
+        arraySet = (T[]) new Object[MAX_SIZE];
+        depth = 0;
     }
 
     public void add(T val){
-        if(arraySet.size() == MAX_SIZE){
+        if(depth >= MAX_SIZE){
             System.out.println("ArraySet is full.");
             return;
         }
-        arraySet.add(val);
+        arraySet[depth] = val;
+        depth++;
     }
 
     public T remove(){
-        return arraySet.remove(arraySet.size()-1);
+        T temp = arraySet[depth-1];
+        depth--;
+        return temp;
     }
 
     public boolean contains(T val){
-        return arraySet.contains(val);
+        for(int i=0; i<depth; i++){
+            if(arraySet[depth].equals(val)) return true;
+        }
+        return false;
     }
 
     public int getSize(){
-        return arraySet.size();
+        return depth;
     }
 }
