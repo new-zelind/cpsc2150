@@ -18,6 +18,8 @@ public class ArraySet<T> extends SetAbs<T> implements ISet<T> {
     }
 
     public void add(T val){
+
+        //if the depth is at the max size or more, then nothing can be added. Otherwise, tack 'val' onto the end.
         if(depth >= MAX_SIZE){
             System.out.println("ArraySet is full.");
             return;
@@ -27,14 +29,18 @@ public class ArraySet<T> extends SetAbs<T> implements ISet<T> {
     }
 
     public T remove(){
+
+        //return the last value in the set and decrement the depth
         T temp = arraySet[depth-1];
         depth--;
         return temp;
     }
 
     public boolean contains(T val){
+
+        //traverse the array and determine if 'val' exists
         for(int i=0; i<depth; i++){
-            if(arraySet[depth].equals(val)) return true;
+            if(arraySet[i].equals(val)) return true;
         }
         return false;
     }

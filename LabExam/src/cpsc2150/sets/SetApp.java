@@ -110,7 +110,7 @@ public class SetApp {
         }
 
         //create the sets
-        if(input.toLowerCase().equals("l")) s = new ArraySet<>();
+        if(input.toLowerCase().equals("a")) s = new ArraySet<>();
         else s = new ListSet<>();
 
         // add values to the set user enters q to stop entering values
